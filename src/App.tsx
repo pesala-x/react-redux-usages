@@ -1,20 +1,24 @@
 import './App.css'
 import {useDispatch, useSelector} from "react-redux";
+import {decrement, increment, toggleVisible} from "./reducers/CountReducer.ts";
 
 function App() {
 
-    const count = useSelector(state => state.count);
-    const isVisible = useSelector(state => state.isVisible);
+    // @ts-ignore
+    const count = useSelector(state => state.counter.count);
+    // // @ts-ignore
+    const isVisible = useSelector(state => state.counter.isVisible);
 
   const dispatch = useDispatch();
   return (
       <>
           {isVisible && <div>{count}</div>}
+          {/*{count}*/}
           <br/>
-          <button onClick={() => dispatch({ type: 'ADD_COUNT' })}>Increment</button>
-          <button onClick={() => dispatch({ type: 'DELETE_COUNT' })}>Decrement</button>
+          <button onClick={() => dispatch(increment())}>Increment</button>
+          <button onClick={() => dispatch(decrement())}>Decrement</button>
           <br/>
-          <button onClick={() => dispatch({ type: 'TOGGLE' })}>Toggle</button>
+          <button onClick={() => dispatch(toggleVisible())}>Toggle</button>
       </>
   )
 }
